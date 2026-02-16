@@ -21,13 +21,6 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ asset, onClose }) =>
     );
   }
 
-  const canDownload = asset.sensitivity === 'Client-safe';
-  const canOpen = asset.sensitivity !== 'Restricted';
-
-  const handleRequestAccess = () => {
-    alert(`Access request for "${asset.title}" has been submitted. You will be notified once approved.`);
-  };
-
   return (
     <div className="w-96 bg-white border-l-2 border-border-200 flex flex-col h-full overflow-hidden">
       {/* Header */}
@@ -79,16 +72,8 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ asset, onClose }) =>
               <dd className="text-text-900 font-medium">{asset.type}</dd>
             </div>
             <div>
-              <dt className="text-text-600">Case Code</dt>
-              <dd className="text-text-900 font-medium">{asset.caseCode}</dd>
-            </div>
-            <div>
               <dt className="text-text-600">Client</dt>
               <dd className="text-text-900 font-medium">{asset.client}</dd>
-            </div>
-            <div>
-              <dt className="text-text-600">Domain</dt>
-              <dd className="text-text-900 font-medium">{asset.domain}</dd>
             </div>
             <div>
               <dt className="text-text-600">Industry</dt>
@@ -99,28 +84,10 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ asset, onClose }) =>
               <dd className="text-text-900 font-medium">{asset.region}</dd>
             </div>
             <div>
-              <dt className="text-text-600">Owner</dt>
-              <dd className="text-text-900 font-medium">{asset.owner}</dd>
-            </div>
-            <div>
               <dt className="text-text-600">Last Updated</dt>
               <dd className="text-text-900 font-medium">{formatDate(asset.updatedAt)}</dd>
             </div>
           </dl>
-        </div>
-
-        <div className="mb-6">
-          <h4 className="text-sm font-semibold text-text-900 mb-2">Tech Stack</h4>
-          <div className="flex flex-wrap gap-2">
-            {asset.techStack.map(tech => (
-              <span
-                key={tech}
-                className="px-2 py-1 text-xs bg-blue-50 text-blue-700 rounded-full border border-blue-200"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
         </div>
 
         <div>
@@ -140,43 +107,22 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ asset, onClose }) =>
 
       {/* Actions */}
       <div className="p-6 border-t border-border-200 space-y-3">
-        {canOpen ? (
-          <>
-            <Button
-              variant="primary"
-              className="w-full"
-              onClick={() => window.open(asset.sourceUrl, '_blank')}
-            >
-              Open
-            </Button>
-            {canDownload ? (
-              <Button
-                variant="secondary"
-                className="w-full"
-                onClick={() => alert(`Downloading ${asset.title}...`)}
-              >
-                Download
-              </Button>
-            ) : (
-              <div className="text-xs text-text-600 bg-yellow-50 p-3 rounded-lg border border-yellow-200">
-                <strong>Download disabled:</strong> This asset is marked as {asset.sensitivity} and cannot be downloaded directly.
-              </div>
-            )}
-          </>
-        ) : (
-          <>
-            <div className="text-xs text-text-600 bg-red-50 p-3 rounded-lg border border-red-200 mb-3">
-              <strong>Access restricted:</strong> This asset requires special permissions to view.
-            </div>
-            <Button
-              variant="outline"
-              className="w-full"
-              onClick={handleRequestAccess}
-            >
-              Request Access
-            </Button>
-          </>
-        )}
+        <>
+          <Button
+            variant="primary"
+            className="w-full"
+            onClick={() => window.open(asset.sourceUrl, '_blank')}
+          >
+            Open
+          </Button>
+          <Button
+            variant="secondary"
+            className="w-full"
+            onClick={() => alert(`Downloading ${asset.title}...`)}
+          >
+            Download
+          </Button>
+        </>
       </div>
     </div>
   );

@@ -20,7 +20,6 @@ export const Help: React.FC = () => {
               <li>• Use the search bar to find assets by keyword, technology, or use case</li>
               <li>• Apply filters to narrow down results by type, industry, tech stack, and more</li>
               <li>• Select multiple assets to ask the AI Advisor questions</li>
-              <li>• Export client-safe assets for use in your projects</li>
             </ul>
           </div>
 
@@ -31,15 +30,6 @@ export const Help: React.FC = () => {
               <li>• Click "Ask AI Advisor" to open the chat interface</li>
               <li>• Ask questions about the selected assets - answers are based only on your selection</li>
               <li>• All responses include source citations for verification</li>
-            </ul>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 border-2 border-border-200">
-            <h2 className="text-xl font-semibold text-text-900 mb-3">Asset Sensitivity</h2>
-            <ul className="space-y-2 text-text-600">
-              <li>• <strong>Client-safe:</strong> Can be freely shared and exported</li>
-              <li>• <strong>Internal:</strong> For internal use only, cannot be downloaded</li>
-              <li>• <strong>Restricted:</strong> Requires special access permissions</li>
             </ul>
           </div>
 

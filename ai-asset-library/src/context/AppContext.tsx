@@ -7,6 +7,9 @@ interface AppContextType {
   toggleAssetSelection: (assetId: string) => void;
   clearSelection: () => void;
   setSelectedAssetIds: (ids: string[]) => void;
+  savedAssetIds: string[];
+  saveAssets: (assetIds: string[]) => void;
+  removeSavedAsset: (assetId: string) => void;
 
   // Filters
   activeFilters: Filters;
@@ -27,10 +30,6 @@ interface AppContextType {
   addChatHistory: (history: ChatHistory) => void;
   loadChatHistory: (historyId: string) => void;
 
-  // Client-safe mode
-  clientSafeMode: boolean;
-  setClientSafeMode: (mode: boolean) => void;
-
   // Sort
   sortBy: 'relevance' | 'recent';
   setSortBy: (sort: 'relevance' | 'recent') => void;
@@ -40,6 +39,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedAssetIds, setSelectedAssetIds] = useState<string[]>([]);
+  const [savedAssetIds, setSavedAssetIds] = useState<string[]>([]);
   const [activeFilters, setActiveFilters] = useState<Filters>({
     types: [],
     caseCodes: [],
@@ -70,7 +70,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       assetIds: ['A-0004', 'A-0005']
     }
   ]);
-  const [clientSafeMode, setClientSafeMode] = useState(false);
   const [sortBy, setSortBy] = useState<'relevance' | 'recent'>('relevance');
 
   const toggleAssetSelection = (assetId: string) => {
@@ -83,6 +82,18 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const clearSelection = () => {
     setSelectedAssetIds([]);
+  };
+
+  const saveAssets = (assetIds: string[]) => {
+    setSavedAssetIds(prev => {
+      const next = new Set(prev);
+      assetIds.forEach(id => next.add(id));
+      return Array.from(next);
+    });
+  };
+
+  const removeSavedAsset = (assetId: string) => {
+    setSavedAssetIds(prev => prev.filter(id => id !== assetId));
   };
 
   const clearFilters = () => {
@@ -136,6 +147,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         toggleAssetSelection,
         clearSelection,
         setSelectedAssetIds,
+        savedAssetIds,
+        saveAssets,
+        removeSavedAsset,
         activeFilters,
         setActiveFilters,
         clearFilters,
@@ -149,8 +163,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         chatHistories,
         addChatHistory,
         loadChatHistory,
-        clientSafeMode,
-        setClientSafeMode,
         sortBy,
         setSortBy,
       }}

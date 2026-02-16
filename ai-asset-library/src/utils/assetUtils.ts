@@ -56,23 +56,16 @@ export function calculateRelevance(asset: Asset, query: string): number {
 }
 
 /**
- * Filter assets based on active filters and client-safe mode
+ * Filter assets based on active filters
  * @param assets - Array of assets to filter
  * @param filters - Active filter criteria
- * @param clientSafeMode - Whether to show only client-safe assets
  * @returns Filtered array of assets
  */
 export function filterAssets(
   assets: Asset[],
-  filters: Filters,
-  clientSafeMode: boolean
+  filters: Filters
 ): Asset[] {
   return assets.filter(asset => {
-    // Client-safe mode filter
-    if (clientSafeMode && asset.sensitivity !== 'Client-safe') {
-      return false;
-    }
-
     // Type filter
     if (filters.types.length > 0 && !filters.types.includes(asset.type)) {
       return false;
@@ -113,11 +106,6 @@ export function filterAssets(
 
     // Status filter
     if (filters.statuses.length > 0 && !filters.statuses.includes(asset.status)) {
-      return false;
-    }
-
-    // Sensitivity filter
-    if (filters.sensitivities.length > 0 && !filters.sensitivities.includes(asset.sensitivity)) {
       return false;
     }
 
@@ -179,25 +167,6 @@ export function getUniqueValues<T extends keyof Asset>(
     }
   });
   return Array.from(values).sort();
-}
-
-/**
- * Check if selected assets can be exported based on sensitivity
- * @param selectedAssets - Array of selected assets
- * @returns Export status and list of blocking assets
- */
-export function canExportAssets(selectedAssets: Asset[]): {
-  canExport: boolean;
-  blockingAssets: Asset[];
-} {
-  const blockingAssets = selectedAssets.filter(
-    asset => asset.sensitivity !== 'Client-safe'
-  );
-
-  return {
-    canExport: blockingAssets.length === 0,
-    blockingAssets,
-  };
 }
 
 export function formatDate(dateString: string): string {

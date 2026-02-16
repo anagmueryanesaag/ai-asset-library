@@ -25,9 +25,7 @@ export const Search: React.FC = () => {
     selectedAssetIds,
     toggleAssetSelection,
     clearSelection,
-    setIsDrawerOpen,
-    clientSafeMode,
-    setClientSafeMode,
+    saveAssets,
     sortBy,
     setSortBy,
   } = useApp();
@@ -44,8 +42,8 @@ export const Search: React.FC = () => {
 
   // Filter and sort assets
   const filteredAssets = useMemo(() => {
-    return filterAssets(mockAssets, activeFilters, clientSafeMode);
-  }, [activeFilters, clientSafeMode]);
+    return filterAssets(mockAssets, activeFilters);
+  }, [activeFilters]);
 
   const sortedAssets = useMemo(() => {
     return sortAssets(filteredAssets, sortBy, searchQuery);
@@ -71,12 +69,6 @@ export const Search: React.FC = () => {
       ...activeFilters,
       [category]: activeFilters[category].filter(v => v !== value),
     });
-  };
-
-  const handleOpenAIAdvisor = () => {
-    if (selectedAssetIds.length > 0) {
-      setIsDrawerOpen(true);
-    }
   };
 
   return (
@@ -123,25 +115,6 @@ export const Search: React.FC = () => {
                   </div>
                 )}
 
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={handleOpenAIAdvisor}
-                  disabled={selectedAssetIds.length === 0}
-                  title={selectedAssetIds.length === 0 ? 'Select assets first' : 'Ask AI Advisor about selected assets'}
-                >
-                  Ask AI Advisor
-                </Button>
-
-                <label className="flex items-center gap-2 text-sm text-text-600 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={clientSafeMode}
-                    onChange={(e) => setClientSafeMode(e.target.checked)}
-                    className="w-4 h-4 rounded border-2 border-border-200 text-primary-600 focus:ring-2 focus:ring-primary-600"
-                  />
-                  Client-safe mode
-                </label>
               </div>
 
               <select
@@ -227,7 +200,7 @@ export const Search: React.FC = () => {
       {/* Bottom: Selection Bar */}
       <SelectionBar
         selectedAssets={selectedAssets}
-        onOpenAIAdvisor={handleOpenAIAdvisor}
+        onSaveSelected={() => saveAssets(selectedAssetIds)}
         onClearSelection={clearSelection}
       />
     </MainLayout>

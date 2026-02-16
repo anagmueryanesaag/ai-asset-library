@@ -25,10 +25,6 @@ export const Cases: React.FC = () => {
             const caseAssets = mockAssets.filter(
               asset => asset.caseCode === caseItem.caseCode
             );
-            const clientSafeCount = caseAssets.filter(
-              asset => asset.sensitivity === 'Client-safe'
-            ).length;
-
             return (
               <button
                 key={caseItem.caseCode}
@@ -70,15 +66,8 @@ export const Cases: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 pt-4 border-t border-border-200">
-                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
-                    {clientSafeCount} Client-safe
-                  </span>
-                  {caseAssets.length - clientSafeCount > 0 && (
-                    <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">
-                      {caseAssets.length - clientSafeCount} Internal/Restricted
-                    </span>
-                  )}
+                <div className="pt-4 border-t border-border-200 text-xs text-text-600">
+                  {caseAssets.length} total assets
                 </div>
               </button>
             );

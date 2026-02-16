@@ -9,18 +9,10 @@ interface FilterRailProps {
 }
 
 export const FilterRail: React.FC<FilterRailProps> = ({ activeFilters, onFiltersChange }) => {
-  const [showMoreFilters, setShowMoreFilters] = useState(false);
-
   const allTypes = getUniqueValues(mockAssets, 'type');
-  const allCaseCodes = getUniqueValues(mockAssets, 'caseCode');
-  const allClients = getUniqueValues(mockAssets, 'client');
-  const allDomains = getUniqueValues(mockAssets, 'domain');
   const allIndustries = getUniqueValues(mockAssets, 'industry');
-  const allTechStacks = getUniqueValues(mockAssets, 'techStack');
   const allRegions = getUniqueValues(mockAssets, 'region');
-  const allStatuses = getUniqueValues(mockAssets, 'status');
-  const allSensitivities = getUniqueValues(mockAssets, 'sensitivity');
-  const allOwners = getUniqueValues(mockAssets, 'owner');
+  const allClients = getUniqueValues(mockAssets, 'client');
 
   const toggleFilter = <K extends keyof Filters>(
     category: K,
@@ -84,38 +76,9 @@ export const FilterRail: React.FC<FilterRailProps> = ({ activeFilters, onFilters
       <h2 className="font-bold text-text-900 mb-6 text-lg">Filters</h2>
 
       <FilterSection title="Type" category="types" options={allTypes} />
-      <FilterSection title="Case Code" category="caseCodes" options={allCaseCodes} />
-      <FilterSection title="Client" category="clients" options={allClients} />
-      <FilterSection title="Domain" category="domains" options={allDomains} />
       <FilterSection title="Industry" category="industries" options={allIndustries} />
-      <FilterSection title="Tech Stack" category="techStacks" options={allTechStacks} />
-
-      {/* More Filters Section */}
-      <div className="border-t border-border-200 pt-4 mt-4">
-        <button
-          onClick={() => setShowMoreFilters(!showMoreFilters)}
-          className="flex items-center justify-between w-full text-sm font-semibold text-text-900 hover:text-primary-600 transition-colors focus-ring py-2 rounded"
-        >
-          <span>More Filters</span>
-          <svg
-            className={`w-4 h-4 transition-transform ${showMoreFilters ? 'rotate-180' : ''}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        {showMoreFilters && (
-          <div className="mt-4">
-            <FilterSection title="Region" category="regions" options={allRegions} />
-            <FilterSection title="Status" category="statuses" options={allStatuses} />
-            <FilterSection title="Sensitivity" category="sensitivities" options={allSensitivities} />
-            <FilterSection title="Owner" category="owners" options={allOwners} />
-          </div>
-        )}
-      </div>
+      <FilterSection title="Region" category="regions" options={allRegions} />
+      <FilterSection title="Client" category="clients" options={allClients} />
     </div>
   );
 };
