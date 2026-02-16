@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { MainLayout } from '../components/layout/MainLayout';
 import { SearchBar } from '../components/ui/SearchBar';
 import { Button } from '../components/ui/Button';
@@ -15,6 +15,7 @@ import type { Asset } from '../types';
 
 export const Search: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const {
     searchQuery,
@@ -31,6 +32,16 @@ export const Search: React.FC = () => {
   } = useApp();
 
   const [previewAsset, setPreviewAsset] = useState<Asset | null>(null);
+
+  useEffect(() => {
+    const state = location.state as { previewAssetId?: string } | null;
+    if (state?.previewAssetId) {
+      const asset = mockAssets.find(item => item.id === state.previewAssetId);
+      if (asset) {
+        setPreviewAsset(asset);
+      }
+    }
+  }, [location.state]);
 
   // Initialize search from URL
   useEffect(() => {
@@ -75,7 +86,7 @@ export const Search: React.FC = () => {
     <MainLayout>
       <div className="flex h-screen overflow-hidden">
         {/* Left: Filters */}
-        <div className="w-64 p-4 overflow-y-auto">
+        <div className="w-60 p-3 overflow-y-auto">
           <FilterRail
             activeFilters={activeFilters}
             onFiltersChange={setActiveFilters}
@@ -85,24 +96,25 @@ export const Search: React.FC = () => {
         {/* Center: Search and Results */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="p-6 bg-white/80 backdrop-blur border-b border-border-200">
-            <div className="flex items-center gap-4 mb-4">
+          <div className="p-4 bg-white/80 backdrop-blur border-b border-border-200">
+            <div className="flex items-center gap-3 mb-3">
               <button
                 onClick={() => navigate('/')}
-                className="text-sm text-text-600 hover:text-text-900 focus-ring"
+                className="text-xs text-text-600 hover:text-text-900 focus-ring"
               >
                 ← Back to Home
               </button>
             </div>
 
-            <h1 className="text-3xl font-bold text-text-900 mb-6">Asset Library</h1>
+            <h1 className="text-2xl font-semibold text-text-900 mb-4">Asset Library</h1>
 
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center gap-3 mb-3">
               <div className="flex-1">
                 <SearchBar
                   initialValue={searchQuery}
                   onSearch={handleSearch}
                   placeholder="Search assets by keyword, technology, use case..."
+                  size="sm"
                 />
               </div>
             </div>
@@ -110,7 +122,7 @@ export const Search: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 {selectedAssetIds.length > 0 && (
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-primary-100 text-primary-600 rounded-full text-sm font-medium">
+                  <div className="flex items-center gap-2 px-2.5 py-1 bg-primary-100 text-primary-600 rounded-full text-xs font-medium">
                     {selectedAssetIds.length} Selected
                   </div>
                 )}
@@ -120,7 +132,7 @@ export const Search: React.FC = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'relevance' | 'recent')}
-                className="px-3 py-1.5 text-sm border-2 border-border-200 rounded-lg focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                className="px-2.5 py-1 text-xs border-2 border-border-200 rounded-lg focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600"
               >
                 <option value="relevance">Sort: Relevance</option>
                 <option value="recent">Sort: Most recent</option>
@@ -129,8 +141,8 @@ export const Search: React.FC = () => {
 
             {/* Active Filters */}
             {activeFilterCount > 0 && (
-              <div className="flex items-center gap-2 mt-4 flex-wrap">
-                <span className="text-sm text-text-600">Active filters:</span>
+              <div className="flex items-center gap-2 mt-3 flex-wrap">
+                <span className="text-xs text-text-600">Active filters:</span>
                 {Object.entries(activeFilters).map(([category, values]) =>
                   values.map((value: string) => (
                     <Chip
@@ -142,7 +154,7 @@ export const Search: React.FC = () => {
                 )}
                 <button
                   onClick={clearFilters}
-                  className="text-sm text-primary-600 hover:underline focus-ring ml-2"
+                  className="text-xs text-primary-600 hover:underline focus-ring ml-2"
                 >
                   Clear all
                 </button>
@@ -151,9 +163,9 @@ export const Search: React.FC = () => {
           </div>
 
           {/* Results */}
-          <div className="flex-1 overflow-y-auto p-6">
-            <div className="mb-4">
-              <p className="text-sm text-text-600">
+          <div className="flex-1 overflow-y-auto p-4">
+            <div className="mb-3">
+              <p className="text-xs text-text-600">
                 <span className="font-semibold text-text-900">
                   {sortedAssets.length}
                 </span>{' '}
@@ -161,7 +173,7 @@ export const Search: React.FC = () => {
               </p>
             </div>
 
-            <div className="space-y-4 pb-24">
+            <div className="space-y-3 pb-20">
               {sortedAssets.map(asset => (
                 <AssetCard
                   key={asset.id}
@@ -175,10 +187,10 @@ export const Search: React.FC = () => {
 
               {sortedAssets.length === 0 && (
                 <div className="text-center py-12">
-                  <h3 className="text-xl font-semibold text-text-900 mb-2">
+                  <h3 className="text-lg font-semibold text-text-900 mb-2">
                     No assets found
                   </h3>
-                  <p className="text-text-600 mb-4">
+                  <p className="text-sm text-text-600 mb-4">
                     Try adjusting your search or filters
                   </p>
                   <Button onClick={clearFilters} variant="secondary">

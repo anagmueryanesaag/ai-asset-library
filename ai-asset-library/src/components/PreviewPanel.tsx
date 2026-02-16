@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import type { Asset } from '../types';
 import { Badge } from './ui/Badge';
 import { Button } from './ui/Button';
@@ -10,15 +11,11 @@ interface PreviewPanelProps {
 }
 
 export const PreviewPanel: React.FC<PreviewPanelProps> = ({ asset, onClose }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   if (!asset) {
-    return (
-      <div className="w-96 bg-white border-l-2 border-border-200 p-6 flex items-center justify-center text-text-600">
-        <div className="text-center">
-          <div className="text-4xl mb-3">👁️</div>
-          <p>Select an asset to preview</p>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (
@@ -42,11 +39,6 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ asset, onClose }) =>
         <h3 className="font-semibold text-text-900 text-xl mb-3 leading-tight">
           {asset.title}
         </h3>
-
-        <div className="flex gap-2 mb-4">
-          <Badge variant={asset.status}>{asset.status}</Badge>
-          <Badge variant={asset.sensitivity}>{asset.sensitivity}</Badge>
-        </div>
 
         <div className="mb-6">
           <h4 className="text-sm font-semibold text-text-900 mb-2">Summary</h4>
@@ -90,19 +82,6 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ asset, onClose }) =>
           </dl>
         </div>
 
-        <div>
-          <h4 className="text-sm font-semibold text-text-900 mb-2">Tags</h4>
-          <div className="flex flex-wrap gap-2">
-            {asset.tags.map(tag => (
-              <span
-                key={tag}
-                className="px-2 py-1 text-xs bg-surface-50 text-text-600 rounded-full border border-border-200"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Actions */}
@@ -118,9 +97,18 @@ export const PreviewPanel: React.FC<PreviewPanelProps> = ({ asset, onClose }) =>
           <Button
             variant="secondary"
             className="w-full"
-            onClick={() => alert(`Downloading ${asset.title}...`)}
+            onClick={() => {
+              if (!asset.caseCode) return;
+              const encodedCase = encodeURIComponent(asset.caseCode);
+              navigate(`/cases/${encodedCase}/preview`, {
+                state: {
+                  returnTo: `${location.pathname}${location.search}`,
+                  previewAssetId: asset.id,
+                },
+              });
+            }}
           >
-            Download
+            Go to case
           </Button>
         </>
       </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { Filters } from '../types';
 import { mockAssets } from '../data/mockData';
 import { getUniqueValues } from '../utils/assetUtils';
+import { ASSET_TYPE_OPTIONS } from '../constants';
 
 interface FilterRailProps {
   activeFilters: Filters;
@@ -9,9 +10,9 @@ interface FilterRailProps {
 }
 
 export const FilterRail: React.FC<FilterRailProps> = ({ activeFilters, onFiltersChange }) => {
-  const allTypes = getUniqueValues(mockAssets, 'type');
+  const allTypes = [...ASSET_TYPE_OPTIONS];
   const allIndustries = getUniqueValues(mockAssets, 'industry');
-  const allRegions = getUniqueValues(mockAssets, 'region');
+  const allRegions = getUniqueValues(mockAssets, 'region').filter(region => region !== 'Global');
   const allClients = getUniqueValues(mockAssets, 'client');
 
   const toggleFilter = <K extends keyof Filters>(
@@ -41,9 +42,11 @@ export const FilterRail: React.FC<FilterRailProps> = ({ activeFilters, onFilters
     const activeValues = activeFilters[category] as string[];
 
     return (
-      <div className="mb-6">
-        <h3 className="font-semibold text-text-900 mb-2 text-sm">{title}</h3>
-        <div className="space-y-1.5">
+      <div className="mb-4">
+        <h3 className="font-semibold text-text-900 mb-2 text-xs uppercase tracking-wide">
+          {title}
+        </h3>
+        <div className="space-y-1">
           {visibleOptions.map(option => (
             <label
               key={option}
@@ -53,16 +56,18 @@ export const FilterRail: React.FC<FilterRailProps> = ({ activeFilters, onFilters
                 type="checkbox"
                 checked={activeValues.includes(option)}
                 onChange={() => toggleFilter(category, option)}
-                className="w-4 h-4 rounded border-2 border-border-200 text-primary-600 focus:ring-2 focus:ring-primary-600 focus:ring-offset-2"
+                className="w-3.5 h-3.5 rounded border-2 border-border-200 text-primary-600 focus:ring-2 focus:ring-primary-600 focus:ring-offset-2"
               />
-              <span className="text-sm text-text-900">{option}</span>
+              <span className="text-xs text-text-900 leading-snug">
+                {option}
+              </span>
             </label>
           ))}
         </div>
         {hasMore && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className="text-xs text-primary-600 mt-2 hover:underline focus-ring"
+            className="text-[11px] text-primary-600 mt-2 hover:underline focus-ring"
           >
             {expanded ? 'Show less' : `Show ${options.length - maxVisible} more`}
           </button>
@@ -72,8 +77,8 @@ export const FilterRail: React.FC<FilterRailProps> = ({ activeFilters, onFilters
   };
 
   return (
-    <div className="w-64 bg-white rounded-2xl p-6 border-2 border-border-200 h-fit sticky top-4">
-      <h2 className="font-bold text-text-900 mb-6 text-lg">Filters</h2>
+    <div className="w-full bg-white rounded-2xl p-4 border-2 border-border-200 h-fit sticky top-4">
+      <h2 className="font-semibold text-text-900 mb-4 text-sm">Filters</h2>
 
       <FilterSection title="Type" category="types" options={allTypes} />
       <FilterSection title="Industry" category="industries" options={allIndustries} />

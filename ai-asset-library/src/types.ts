@@ -1,12 +1,18 @@
 export type AssetType =
-  | 'Architecture HLD'
-  | 'Code Sample'
-  | 'Deployment Guide'
-  | 'Technical Doc'
-  | 'Benchmark Report'
-  | 'Model Card'
-  | 'Integration Pattern'
-  | 'Security Guide';
+  | 'Behavior & controls'
+  | 'Code overview'
+  | 'Decision logs'
+  | 'Demo'
+  | 'Experience share'
+  | 'Figma'
+  | 'HLD'
+  | 'Methodologies'
+  | 'Other decks'
+  | 'PDD'
+  | 'Pipeline orchestration'
+  | 'Tech documentation'
+  | 'User journeys'
+  | 'Video';
 
 export type Sensitivity =
   | 'Client-safe'
@@ -39,13 +45,28 @@ export interface Asset {
   content?: string; // Full content for preview/AI
 }
 
+export interface CaseAssetLinks {
+  codeOverview?: string;
+  pipelineOrchestration?: string;
+  userJourneys?: string;
+  behaviorControl?: string;
+  hld?: string;
+  pdd?: string;
+  standardDecisionLog?: string;
+  figma?: string;
+  demo?: string;
+}
+
 export interface Case {
   caseCode: string;
   name: string;
   client: string;
+  date: string;
   region: string;
   industry: string;
   description: string;
+  aisTeamMembers: string[];
+  assetLinks?: CaseAssetLinks;
 }
 
 export interface ChatMessage {

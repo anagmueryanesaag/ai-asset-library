@@ -13,7 +13,7 @@ export const Chip: React.FC<ChipProps> = ({ label, onRemove, variant = 'default'
   };
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm ${variantClasses[variant]}`}>
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs ${variantClasses[variant]}`}>
       {label}
       {onRemove && (
         <button

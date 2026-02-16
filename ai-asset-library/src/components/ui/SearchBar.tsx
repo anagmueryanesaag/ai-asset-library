@@ -36,7 +36,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         placeholder={placeholder}
         className={`flex-1 px-4 ${sizeClasses[size]} rounded-xl border-2 border-border-200 focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 transition-all`}
       />
-      <Button type="submit" size={size === 'lg' ? 'lg' : 'md'}>
+      <Button type="submit" size={size}>
         Search
       </Button>
     </form>

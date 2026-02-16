@@ -33,16 +33,39 @@ export const AI_SUGGESTED_QUESTIONS = [
   'Summarize the tech stack recommendations',
 ] as const;
 
+export const ASSET_TYPE_OPTIONS = [
+  'Behavior & controls',
+  'Code overview',
+  'Decision logs',
+  'Demo',
+  'Experience share',
+  'Figma',
+  'HLD',
+  'Methodologies',
+  'Other decks',
+  'PDD',
+  'Pipeline orchestration',
+  'Tech documentation',
+  'User journeys',
+  'Video',
+] as const;
+
 // Asset type icons mapping
 export const ASSET_TYPE_ICONS: Record<string, string> = {
-  'Architecture HLD': '🏗️',
-  'Code Sample': '💻',
-  'Deployment Guide': '🚀',
-  'Technical Doc': '📄',
-  'Benchmark Report': '📊',
-  'Model Card': '🎯',
-  'Integration Pattern': '🔗',
-  'Security Guide': '🔒',
+  'Behavior & controls': '🎛️',
+  'Code overview': '💻',
+  'Decision logs': '📝',
+  'Demo': '▶️',
+  'Experience share': '💬',
+  'Figma': '🎨',
+  'HLD': '🏗️',
+  'Methodologies': '🧭',
+  'Other decks': '🗂️',
+  'PDD': '📄',
+  'Pipeline orchestration': '🧵',
+  'Tech documentation': '📘',
+  'User journeys': '🗺️',
+  'Video': '🎬',
 } as const;
 
 // Relevance scoring weights

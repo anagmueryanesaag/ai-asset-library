@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { Search } from './pages/Search';
 import { Cases } from './pages/Cases';
 import { CaseView } from './pages/CaseView';
+import { CasePreview } from './pages/CasePreview';
 import { Saved } from './pages/Saved';
 import { Help } from './pages/Help';
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/cases" element={<Cases />} />
             <Route path="/cases/:caseCode" element={<CaseView />} />
+            <Route path="/cases/:caseCode/preview" element={<CasePreview />} />
             <Route path="/saved" element={<Saved />} />
             <Route path="/help" element={<Help />} />
           </Routes>

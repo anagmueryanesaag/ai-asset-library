@@ -1,0 +1,153 @@
+[
+  {
+    "caseCode": "T9LF",
+    "name": "Gen AI CC Knowledge Management",
+    "client": "Bread Financial",
+    "date": "2025-01-10",
+    "region": "Americas",
+    "industry": "Financial Services",
+    "description": "GenAI-powered knowledge management solution for contact center agents in a financial services organization, focused on improving policy/procedure lookup and answer generation during live customer interactions. Built as a scalable RAG application with reusable platform components (ingestion, retrieval, security/guardrails, evaluation, and an AI gateway) to extend beyond the Care Center into other operations and functions.",
+    "aisTeamMembers": [
+      "Ali Arian",
+      "David Mondry",
+      "John Groves",
+      "Mikita Misiura",
+      "Mark Chang"
+    ],
+    "assetLinks": {
+      "codeOverview": "/cases/T9LF/250125_Bread_Financial_input_for_AIS_UTH1.md",
+      "demo": "http://www.test1.com"
+    }
+  },
+  {
+    "caseCode": "H6TV",
+    "name": "L&T AI",
+    "client": "Larsen & Toubro Ltd",
+    "date": "2025-05-27",
+    "region": "APAC",
+    "industry": "Advanced Manufacturing & Services",
+    "description": "A multi-application enterprise AI program for Larsen & Toubro (L&T) that delivered high-impact AI use cases across EPC operations and support functions over ~18 months. The delivery included composite AI applications for project execution, equipment planning, workmen planning/compliance, procurement vendor optimization, and multiple HR assistants, built with agentic orchestration, RAG, ML optimization, and Azure-based deployment.",
+    "aisTeamMembers": [
+      "Karthik Kappaganthu",
+      "Atul Kumar",
+      "Manu Aggarwal",
+      "Nikhil Ojha",
+      "Ajay Arn",
+      "Tripti Shrivastava",
+      "Tarun Narang",
+      "Samyak Shah",
+      "Rishil Shah",
+      "Aayush Singla",
+      "Sai Surve",
+      "Avinash Pandeshwar",
+      "Harsh Vardhan",
+      "Aditya Upadhyay",
+      "Aneesh Kapur",
+      "Ajay Kumar",
+      "Prateek Khare",
+      "Aditya Srivastava",
+      "Siddhi Agarwal",
+      "Ray Walker",
+      "Shreyash Mishra",
+      "Shaurya Vardhan",
+      "Prankur Gupta",
+      "Joanna Soh",
+      "Divjyot Singh",
+      "Vaibhav Bathri",
+      "Hanyu Tang",
+      "Kay Shuu",
+      "Jade Chopping",
+      "Ankita Punjabi",
+      "Kabir Soeny"
+    ],
+    "assetLinks": {
+      "codeOverview": "/cases/H6TV/260211_L&T_input_for_AIS_UTH.md",
+      "demo": "http://www.test2.com"
+    }
+  },
+  {
+    "caseCode": "X2AK",
+    "name": "Agentic AI MVP Build",
+    "client": "Paychex",
+    "date": "2025-11-14",
+    "region": "Americas",
+    "industry": "Technology, Media & Telecom",
+    "description": "Paychex’s payroll operations receive a very high volume of payroll instructions via email, creating costly and error-prone manual processing. Bain built and deployed an agentic AI system that classifies and validates inbound emails, resolves account context, generates payroll submissions via internal systems, and produces customer-ready responses, supported by rigorous testing, shadow-mode experimentation, and a Control Tower for transparency.",
+    "aisTeamMembers": [
+      "Sofie Juel",
+      "Xun Yang",
+      "Fernando Flores",
+      "Luis Montoya",
+      "Luis Vargas",
+      "Emily Stebbins",
+      "Saimon Rai",
+      "Will Gerard",
+      "Yasmine Silmi"
+    ],
+    "assetLinks": {
+      "codeOverview": "/cases/X2AK/260114_Paychex_input_for_AIS_UTH1.md",
+      "demo": "http://www.test3.com"
+    }
+  },
+  {
+    "caseCode": "R9EL",
+    "name": "Digico Data & AI CoE and value deliv",
+    "client": "PLDT",
+    "date": "2025-12-19",
+    "region": "APAC",
+    "industry": "Technology, Media & Telecom",
+    "description": "Bain supported PLDT in defining and scaling its digital services entity (\"DigiCo\") and the underlying data-and-AI platform initiative (\"Kayana\"). The work set a five-year business roadmap and revenue/valuation ambition while enabling early product commercialization and GenAI/ML proof-of-concepts on an AWS-based data ecosystem.",
+    "aisTeamMembers": [
+      "John Zheng",
+      "Jex Mandrell Liwag",
+      "Shohreh Deldari",
+      "Oliver Sellwood"
+    ],
+    "assetLinks": {
+      "codeOverview": "/cases/R9EL/260115_PLDT_input_for_AIS_UTH1.md",
+      "demo": "http://www.test4.com"
+    }
+  },
+  {
+    "caseCode": "J5HN",
+    "name": "AI-powered project schedule",
+    "client": "SAIPEM",
+    "date": "2025-06-30",
+    "region": "EMEA",
+    "industry": "Advanced Manufacturing & Services",
+    "description": "SAIPEM (also referred to as the AIS J5HN Planner / AI Project Schedule) is an AI-assisted scheduling and decision-support application built for Saipem to accelerate early project planning during the bidding (ITT/RFP) phase. It combines rule-based schedule generation with historical-project inference and a GenAI chatbot that answers schedule and procurement questions via natural-language-to-SQL. Wave 1 focuses on onshore projects and produces Primavera-compatible schedules with durations, dependencies, and man-hour estimates.",
+    "aisTeamMembers": [
+      "Giorgio Bientinesi",
+      "Axel Hecht",
+      "Luis Morillo",
+      "DesirÃ©e Gentilini",
+      "Sergio Sierra",
+      "Rachel Liu"
+    ],
+    "assetLinks": {
+      "codeOverview": "/cases/J5HN/260109_Saipem_input_for_AIS_UTH1.md",
+      "demo": "http://www.test5.com"
+    }
+  },
+  {
+    "caseCode": "E9TR",
+    "name": "Project Aiden Phase 4",
+    "client": "Unilab Inc.",
+    "date": "2025-11-28",
+    "region": "APAC",
+    "industry": "Healthcare & Life Sciences",
+    "description": "AIDEN is Unilab’s enterprise GenAI-powered business intelligence platform, delivering a unified suite of applications across finance, procurement, master data management, and commercial market intelligence. The platform combines a shared Next.js frontend with multiple FastAPI backends, a data platform for ingestion and conformed assets, and LLM-enabled features including chat assistants, insight generation, semantic search, and agentic workflows.",
+    "aisTeamMembers": [
+      "Jack Clark",
+      "Kaitlin Whitaker",
+      "Sebastian Astone",
+      "Jess (AAG) Davis",
+      "Faraz Ghas",
+      "Filbert Tjangnaka"
+    ],
+    "assetLinks": {
+      "codeOverview": "/cases/E9TR/260114_Unilab_input_AIS_UTH1.md",
+      "hld": "/cases/E9TR/Diagram_Unilab.png"
+    }
+  }
+]
