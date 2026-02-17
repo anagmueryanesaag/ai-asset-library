@@ -49,9 +49,6 @@ export const AssetCard: React.FC<AssetCardProps> = ({
               >
                 {asset.type} - {asset.client}
               </button>
-              <p className="text-xs text-text-600 leading-snug line-clamp-2">
-                {asset.summary}
-              </p>
             </div>
           </div>
 

@@ -46,11 +46,8 @@ export const Saved: React.FC = () => {
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <h3 className="text-lg font-semibold text-text-900 mb-2">
-                      {asset.title}
+                      {asset.type} - {asset.client}
                     </h3>
-                    <p className="text-sm text-text-600 mb-3">
-                      {asset.summary}
-                    </p>
                     <div className="flex flex-wrap gap-4 text-xs text-text-600">
                       <span>{asset.client}</span>
                       <span>{asset.industry}</span>
